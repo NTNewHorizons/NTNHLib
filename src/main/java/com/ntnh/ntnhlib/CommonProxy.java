@@ -16,6 +16,9 @@ public class CommonProxy {
 
         ntnhlib.LOG.info(Config.greeting);
         ntnhlib.LOG.info("I am MyMod at version " + Tags.VERSION);
+
+        MT.loadAllScripts();
+
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
@@ -27,5 +30,7 @@ public class CommonProxy {
     }
 
     // register server commands in this event handler (Remove if not needed)
-    public void serverStarting(FMLServerStartingEvent event) {}
+    public void serverStarting(FMLServerStartingEvent event) {
+        MT.loadAllScripts();
+    }
 }
