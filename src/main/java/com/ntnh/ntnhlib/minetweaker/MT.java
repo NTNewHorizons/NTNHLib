@@ -19,29 +19,22 @@ public class MT {
 
     static {
         if (Loader.isModLoaded("MineTweaker3")) {
-            // Автоматически загружаем все скрипты из minetweaker/
             loadAllScripts();
         }
     }
 
     private static void loadAllScripts() {
         try {
-            // Получаем путь к ресурсной директории
             URL resourceDir = ntnhlib.class.getResource("/minetweaker/");
-
             if (resourceDir != null) {
                 File dir = new File(resourceDir.toURI());
-
                 if (dir.exists() && dir.isDirectory()) {
                     File[] files = dir.listFiles((d, name) -> name.endsWith(".zs"));
-
                     if (files != null) {
                         List<String> scriptNames = new ArrayList<>();
-
                         for (File file : files) {
                             scriptNames.add(file.getName());
                         }
-
                         for (String scriptName : scriptNames) {
                             try {
                                 String resourcePath = "/minetweaker/" + scriptName;
@@ -52,7 +45,6 @@ public class MT {
                                     sendScript(scriptName, content);
                                 }
                             } catch (IOException ignored) {
-                                // Файл не существует или ошибка доступа - пропускаем
                             }
                         }
                     }
