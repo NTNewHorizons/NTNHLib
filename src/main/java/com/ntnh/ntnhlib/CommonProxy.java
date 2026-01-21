@@ -15,14 +15,14 @@ public class CommonProxy {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
 
         ntnhlib.LOG.info(Config.greeting);
-        ntnhlib.LOG.info("I am MyMod at version " + Tags.VERSION);
-
-        MT.loadMineTweakerScripts();
+        ntnhlib.LOG.info("I am NTNHLib at version " + Tags.VERSION);
 
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
-    public void init(FMLInitializationEvent event) {}
+    public void init(FMLInitializationEvent event) {
+        MT.loadMineTweakerScripts();
+    }
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)
     public void postInit(FMLPostInitializationEvent event) {}
