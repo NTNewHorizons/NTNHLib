@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.ntnh.ntnhlib.mixin",
+  "compatLevel": "JAVA_8",
+  "mixins": [],
+  "server": ["MixinCrashReport"],
+  "client": ["MixinCrashReport"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

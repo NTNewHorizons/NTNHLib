@@ -1,9 +1,15 @@
 package com.ntnh.ntnhlib;
 
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.ICommandSender;
+import net.minecraftforge.common.MinecraftForge;
+
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class CommonProxy {
 
@@ -13,7 +19,7 @@ public class CommonProxy {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
 
         NTNHLib.LOG.info(Config.greeting);
-        NTNHLib.LOG.info("I am MyMod at version " + Tags.VERSION);
+        NTNHLib.LOG.info("I am NTNHLib at version " + Tags.VERSION);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
@@ -23,5 +29,36 @@ public class CommonProxy {
     public void postInit(FMLPostInitializationEvent event) {}
 
     // register server commands in this event handler (Remove if not needed)
-    public void serverStarting(FMLServerStartingEvent event) {}
+    public void serverStarting(FMLServerStartingEvent event) {
+        // Temporary test command to crash the server and test witty comments
+        if (Config.debug) {
+            event.registerServerCommand(new CommandBase() {
+
+                @Override
+                public String getCommandName() {
+                    return "testcrash";
+                }
+
+                @Override
+                public String getCommandUsage(ICommandSender sender) {
+                    return "/testcrash - Crashes the server to test NTNHLib crash messages";
+                }
+
+                @Override
+                public void processCommand(ICommandSender sender, String[] args) {
+                    MinecraftForge.EVENT_BUS.register(new Object() {
+
+                        @SubscribeEvent
+                        public void onTick(TickEvent.ServerTickEvent event) {
+                            if (event.phase == TickEvent.Phase.END) {
+                                MinecraftForge.EVENT_BUS.unregister(this);
+                                throw new Error(
+                                    "Test crash initiated by /testcrash command - check crash report for custom witty comments!");
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    }
 }
