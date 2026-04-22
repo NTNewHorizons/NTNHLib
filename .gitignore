@@ -30,6 +30,8 @@ whitelist.json
 *.DS_Store
 !gradlew.bat
 .factorypath
+forge-1.7.10-10.13.4.1614-1.7.10-universal.jar.src/
+minecraft-1.7.10-client.jar.src/
 addon.local.gradle
 addon.local.gradle.kts
 addon.late.local.gradle
