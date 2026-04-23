@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CrashReport.class)
 public abstract class MixinCrashReport {
 
-    @Inject(method = "func_71523_a", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getWittyComment", at = @At("HEAD"), cancellable = true)
     private static void onGetWittyComment(CallbackInfoReturnable<String> cir) {
         List<String> comments = new ArrayList<>(
             Arrays.asList(
