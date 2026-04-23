@@ -29,6 +29,7 @@ public class NTNHLib {
     @Mod.EventHandler
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
+        com.ntnh.ntnhlib.handlers.ScriptHandler.loadAllScripts();
         proxy.init(event);
     }
 
